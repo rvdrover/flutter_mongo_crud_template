@@ -25,7 +25,7 @@ class CrudProvider extends ChangeNotifier {
   }
 
   Future deleteData(String id) async {
-    print(id + "second");
+    print(id+"second");
     final Uri url = Uri.parse('https://fluttermongocrud.herokuapp.com/delete');
     var response = await client.delete(url,
         headers: <String, String>{

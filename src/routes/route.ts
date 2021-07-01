@@ -45,7 +45,7 @@ router.delete("/delete", async (req, res) => {
 router.put("/update", async (req, res) => {
 
     const filter = {
-        id: req.body.id,
+        _id: req.body._id
     };
 
     const updateData = {

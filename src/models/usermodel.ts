@@ -9,7 +9,7 @@ interface TodoDocument extends mongoose.Document {
 }
 
 const todoSchema = new mongoose.Schema({
-    _id: { type: String, required: true },
+    _id: { type: String, required: false },
     name: { type: String, required: true },
     email: { type: String, required: true },
     age: { type: Number, required: false }

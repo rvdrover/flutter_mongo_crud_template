@@ -30,15 +30,13 @@ router.delete("/delete", async (req, res) => {
     const filter = {
         _id: req.body._id
     };
-
-    try {
-        const dataitem = await Todo.deleteOne(filter);
-        res.status(200).json({
-            data: dataitem,
-        });
-    } catch (error) {
+    const dataitem = await Todo.deleteOne(filter).then((data) =>
+        res.json({
+            data: data,
+        })
+    ).catch((error) => {
         return res.send(error);
-    }
+    })
 
 
 });
@@ -49,19 +47,19 @@ router.put("/update", async (req, res) => {
     const filter = {
         id: req.body.id,
     };
+
     const updateData = {
         name: req.body.name,
         email: req.body.email,
         age: req.body.age,
     };
-
-    try {
-
-        const dataitem = await Todo.updateOne(filter, updateData);
-        res.json({ data: dataitem, });
-    } catch (error) {
+    const dataitem = await Todo.updateOne(filter, updateData).then((data) =>
+        res.json({
+            data: data,
+        })
+    ).catch((error) => {
         return res.send(error);
-    }
+    })
 
 
 });

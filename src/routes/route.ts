@@ -30,7 +30,7 @@ router.delete("/delete", async (req, res) => {
     const filter = {
         id: req.body.id,
     };
-    const dataitem = await Todo.deleteOne(filter).then((data) =>
+    const dataitem = await Todo.findByIdAndDelete(filter).then((data) =>
         res.json({
             data: data,
         })
@@ -53,7 +53,7 @@ router.put("/update", async (req, res) => {
         email: req.body.email,
         age: req.body.age,
     };
-    const dataitem = await Todo.updateOne(filter, updateData).then((data) =>
+    const dataitem = await Todo.findByIdAndUpdate(filter, updateData).then((data) =>
         res.json({
             data: data,
         })

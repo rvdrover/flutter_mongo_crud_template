@@ -25,13 +25,14 @@ class CrudProvider extends ChangeNotifier {
   }
 
   Future deleteData(String id) async {
+    print(id + "second");
     final Uri url = Uri.parse('https://fluttermongocrud.herokuapp.com/delete');
     var response = await client.delete(url,
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
-        body: jsonEncode({"name": id}));
-        print (response.body);
+        body: jsonEncode({"_id": id}));
+    print(response.body);
     return response.body;
   }
 
@@ -42,6 +43,7 @@ class CrudProvider extends ChangeNotifier {
           'Content-Type': 'application/json; charset=UTF-8',
         },
         body: jsonEncode(data));
+    print(response.body);
     return response.body;
   }
 }

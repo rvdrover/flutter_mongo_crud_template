@@ -22,7 +22,7 @@ class _HomeViewState extends State<HomeView> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () => addData(context),
+        onPressed: () => addDatawidget(context),
       ),
       appBar: AppBar(title: Text("Flutter mongo crud")),
       body: Container(
@@ -33,13 +33,15 @@ class _HomeViewState extends State<HomeView> {
               itemCount: model.crudData.length,
               itemBuilder: (context, int index) {
                 return ListTile(
-                  onTap: () {
-                    print(model.crudData[index]);
-                    model.deleteData(model.crudData[index]['_id']);
-
+                  onLongPress: () {
+                    print(model.crudData[index]["_id"] + " first");
+                    model.deleteData(model.crudData[index]["_id"]);
                   },
-                  title: Text(model.crudData[index]['name']),
-                  subtitle: Text(model.crudData[index]['email']),
+                  onTap: () {
+                    updateDatawidget(context, model.crudData[index]["_id"]);
+                  },
+                  title: Text(model.crudData[index]["name"]),
+                  subtitle: Text(model.crudData[index]["email"]),
                 );
               },
             ),

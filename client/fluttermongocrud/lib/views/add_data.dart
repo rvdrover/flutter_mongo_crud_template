@@ -7,7 +7,7 @@ final namecontroller = TextEditingController();
 final emailcontroller = TextEditingController();
 final agecontroller = TextEditingController();
 
-addData(BuildContext context) {
+addDatawidget(BuildContext context) {
   return showModalBottomSheet(
     context: context,
     builder: (context) {
@@ -38,7 +38,6 @@ addData(BuildContext context) {
                       "age": agecontroller.text,
                     });
                   }
-                   
                 },
                 child: Text("Submit"))
           ],
@@ -48,7 +47,7 @@ addData(BuildContext context) {
   );
 }
 
-updateData(BuildContext context) {
+updateDatawidget(BuildContext context, String id) {
   return showModalBottomSheet(
     context: context,
     builder: (context) {
@@ -73,15 +72,16 @@ updateData(BuildContext context) {
                 onPressed: () {
                   if (namecontroller.text.isNotEmpty &&
                       emailcontroller.text.isNotEmpty) {
-                    Provider.of<CrudProvider>(context, listen: false).updateData({
+                    Provider.of<CrudProvider>(context, listen: false)
+                        .updateData({
+                      "_id": id,
                       "name": namecontroller.text,
                       "email": emailcontroller.text,
                       "age": agecontroller.text,
                     });
                   }
-                   
                 },
-                child: Text("Submit"))
+                child: Text("update"))
           ],
         ),
       );

@@ -1,12 +1,10 @@
 import express from "express";
 import { Todo } from "../models/usermodel";
 const router = express.Router();
-import { ObjectId } from 'mongodb';
-import mongoose from "mongoose";
 
 router.post("/add", async (req, res) => {
-    const { _id,name, email, age } = req.body;
-    const dataItem = new Todo({ _id,name, email, age });
+    const { name, email, age } = req.body;
+    const dataItem = new Todo({ name, email, age });
 
     await dataItem.save();
 
@@ -29,16 +27,18 @@ router.get("/", async (req, res) => {
 
 router.delete("/delete", async (req, res) => {
 
-    // const filter = {
-    //     id: req.body.id,
-    // };
-    const dataitem = await Todo.findByIdAndDelete(req.body._id).then((data) =>
-        res.json({
-            data: data,
-        })
-    ).catch((error) => {
+    const filter = {
+        "_id": req.body.id
+    };
+
+    try {
+        const dataitem = await Todo.deleteOne(filter);
+        res.status(200).json({
+            data: dataitem,
+        });
+    } catch (error) {
         return res.send(error);
-    })
+    }
 
 
 });
@@ -49,19 +49,19 @@ router.put("/update", async (req, res) => {
     const filter = {
         id: req.body.id,
     };
-
     const updateData = {
         name: req.body.name,
         email: req.body.email,
         age: req.body.age,
     };
-    const dataitem = await Todo.updateOne(filter, updateData).then((data) =>
-        res.json({
-            data: data,
-        })
-    ).catch((error) => {
+
+    try {
+
+        const dataitem = await Todo.updateOne(filter, updateData);
+        res.json({ data: dataitem, });
+    } catch (error) {
         return res.send(error);
-    })
+    }
 
 
 });

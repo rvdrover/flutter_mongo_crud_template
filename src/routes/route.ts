@@ -28,7 +28,7 @@ router.get("/", async (req, res) => {
 router.delete("/delete", async (req, res) => {
 
     const filter = {
-        _id: req.body.id
+        id: req.body._id
     };
 
     try {

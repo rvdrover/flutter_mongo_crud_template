@@ -50,6 +50,7 @@ router.put("/update", async (req, res) => {
 
     const updateData = {
         name: req.body.name,
+        email: req.body.email,
         age: req.body.age,
     };
     const dataitem = await Todo.updateOne(filter, updateData).then((data) =>

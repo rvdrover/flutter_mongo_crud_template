@@ -33,6 +33,11 @@ class _HomeViewState extends State<HomeView> {
               itemCount: model.crudData.length,
               itemBuilder: (context, int index) {
                 return ListTile(
+                  onTap: () {
+                    print(model.crudData[index]);
+                    model.deleteData(model.crudData[index]['_id']);
+
+                  },
                   title: Text(model.crudData[index]['name']),
                   subtitle: Text(model.crudData[index]['email']),
                 );

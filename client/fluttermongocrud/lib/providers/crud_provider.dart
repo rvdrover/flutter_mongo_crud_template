@@ -14,7 +14,7 @@ class CrudProvider extends ChangeNotifier {
     crudData = parsedData['data'];
   }
 
-  Future AddData(Map<String, String> body) async {
+  Future addData(Map<String, String> body) async {
     final Uri url = Uri.parse('https://fluttermongocrud.herokuapp.com/add');
     var response = await client.post(url,
         headers: <String, String>{
@@ -26,11 +26,22 @@ class CrudProvider extends ChangeNotifier {
 
   Future deleteData(String id) async {
     final Uri url = Uri.parse('https://fluttermongocrud.herokuapp.com/delete');
-    var response = await client.delete(url, headers: <String, String>{
-      'Content-Type': 'application/json; charset=UTF-8',
-    }, body: {
-      "id": id
-    });
+    var response = await client.delete(url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode({"name": id}));
+        print (response.body);
+    return response.body;
+  }
+
+  Future updateData(Map<String, String> data) async {
+    final Uri url = Uri.parse('https://fluttermongocrud.herokuapp.com/update');
+    var response = await client.put(url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(data));
     return response.body;
   }
 }

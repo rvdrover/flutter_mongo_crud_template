@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 
 interface TodoDocument extends mongoose.Document {
-    _id: string,
+    _id: mongoose.ObjectId,
     name: string;
     email: string;
     age: number;

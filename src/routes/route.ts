@@ -5,8 +5,8 @@ import { ObjectId } from 'mongodb';
 import mongoose from "mongoose";
 
 router.post("/add", async (req, res) => {
-    const { _id, name, email, age } = req.body;
-    const dataItem = new Todo({ _id, name, email, age });
+    const { _id,name, email, age } = req.body;
+    const dataItem = new Todo({ _id,name, email, age });
 
     await dataItem.save();
 

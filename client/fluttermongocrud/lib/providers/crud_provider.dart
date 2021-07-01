@@ -8,14 +8,14 @@ class CrudProvider extends ChangeNotifier {
   List<dynamic> crudData = <dynamic>[];
 
   Future fetchData() async {
-    final Uri url = Uri.parse('https://fluttermongocrud.herokuapp.com/');
+    final Uri url = Uri.parse('https://yourserver/');
     var response = await client.get(url);
     final Map parsedData = await jsonDecode(response.body.toString());
     crudData = parsedData['data'];
   }
 
   Future addData(Map<String, String> body) async {
-    final Uri url = Uri.parse('https://fluttermongocrud.herokuapp.com/add');
+    final Uri url = Uri.parse('https://yourserver/add');
     var response = await client.post(url,
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
@@ -25,7 +25,7 @@ class CrudProvider extends ChangeNotifier {
   }
 
   Future deleteData(String id) async {
-    final Uri url = Uri.parse('https://fluttermongocrud.herokuapp.com/delete');
+    final Uri url = Uri.parse('https://yourserver/delete');
     var response = await client.delete(url,
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
@@ -35,7 +35,7 @@ class CrudProvider extends ChangeNotifier {
   }
 
   Future updateData(Map<String, String> data) async {
-    final Uri url = Uri.parse('https://fluttermongocrud.herokuapp.com/update');
+    final Uri url = Uri.parse('https://yourserver/update');
     var response = await client.put(url,
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',

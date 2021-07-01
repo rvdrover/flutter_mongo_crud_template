@@ -1,6 +1,8 @@
 import express from "express";
 import { Todo } from "../models/usermodel";
 const router = express.Router();
+import { ObjectId } from 'mongodb';
+import mongoose from "mongoose";
 
 router.post("/add", async (req, res) => {
     const { name, email, age } = req.body;
@@ -27,10 +29,10 @@ router.get("/", async (req, res) => {
 
 router.delete("/delete", async (req, res) => {
 
-    const filter = {
-        id: req.body.id,
-    };
-    const dataitem = await Todo.deleteOne(filter).then((data) =>
+    // const filter = {
+    //     id: req.body.id,
+    // };
+    const dataitem = await Todo.findByIdAndDelete(new mongoose.Types.ObjectId(req.body._id)).then((data) =>
         res.json({
             data: data,
         })
